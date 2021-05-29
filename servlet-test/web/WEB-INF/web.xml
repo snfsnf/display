@@ -21,4 +21,13 @@
         <servlet-name>myServlet1</servlet-name>
         <url-pattern>/myServlet1</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>requestServlet</servlet-name>
+        <servlet-class>com.snf.RequestServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>requestServlet</servlet-name>
+        <url-pattern>/request</url-pattern>
+    </servlet-mapping>
 </web-app>

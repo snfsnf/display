@@ -3,10 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+
+    <context-param>
+        <param-name>xml-key</param-name>
+        <param-value>xml-value</param-value>
+    </context-param>
     
     <servlet>
         <servlet-name>myServlet</servlet-name>
         <servlet-class>com.snf.MyServlet</servlet-class>
+        <!--  服务器启动创建对象      -->
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>myServlet</servlet-name>
@@ -29,5 +36,85 @@
     <servlet-mapping>
         <servlet-name>requestServlet</servlet-name>
         <url-pattern>/request</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>responseServlet</servlet-name>
+        <servlet-class>com.snf.ResponseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>responseServlet</servlet-name>
+        <url-pattern>/response</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>charsetServlet</servlet-name>
+        <servlet-class>com.snf.CharsetServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>charsetServlet</servlet-name>
+        <url-pattern>/charset</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>forward</servlet-name>
+        <servlet-class>com.snf.ForwardServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>forward</servlet-name>
+        <url-pattern>/forward</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>redirectServlet</servlet-name>
+        <servlet-class>com.snf.RedirectServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>redirectServlet</servlet-name>
+        <url-pattern>/redirect</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>cookieServlet</servlet-name>
+        <servlet-class>com.snf.CookieServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>cookieServlet</servlet-name>
+        <url-pattern>/cookie</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>sessionServlet</servlet-name>
+        <servlet-class>com.snf.SessionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sessionServlet</servlet-name>
+        <url-pattern>/session</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>servletContextServlet</servlet-name>
+        <servlet-class>com.snf.ServletContextServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servletContextServlet</servlet-name>
+        <url-pattern>/servletContext</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>servletConfigServlet</servlet-name>
+        <servlet-class>com.snf.ServletConfigServlet</servlet-class>
+        <init-param>
+            <param-name>hello1</param-name>
+            <param-value>world1</param-value>
+        </init-param>
+        <init-param>
+            <param-name>hello2</param-name>
+            <param-value>world2</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>servletConfigServlet</servlet-name>
+        <url-pattern>/servletConfig</url-pattern>
     </servlet-mapping>
 </web-app>

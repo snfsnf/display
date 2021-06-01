@@ -12,9 +12,22 @@
     <title>Title</title>
 </head>
 <body>
-<%
-int i = 5/0;
+<%!
+    String str = "jsp全局变量";
+    public void test(){
+        System.out.println("全局代码块");
+    }
 %>
+<%
+//int i = 5/0;
+%>
+<%--获取全局变量值并响应到页面--%>
+<%=str%>
+
+<%--静态导入页面--%>
+<%@ include file="index.jsp"%>
+<%--动态导入页面--%>
+<jsp:include page=""/>
 </body>
 
 </html>

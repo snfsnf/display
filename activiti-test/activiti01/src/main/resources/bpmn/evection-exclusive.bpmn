@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+                  xmlns:camunda="http://camunda.org/schema/1.0/bpmn"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1xfxcxf" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="evection-exclusive" name="排他网关" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_0jgsklu</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="Gateway_0ya291g">
+      <bpmn:incoming>Flow_0ve9ceq</bpmn:incoming>
+      <bpmn:outgoing>Flow_0fifcgj</bpmn:outgoing>
+      <bpmn:outgoing>Flow_10xmjtp</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="Event_1ou98w5">
+      <bpmn:incoming>Flow_09f4c0a</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="create" name="填写出差单" camunda:assignee="张三">
+      <bpmn:incoming>Flow_0jgsklu</bpmn:incoming>
+      <bpmn:outgoing>Flow_0apeuqy</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="deptManager" name="部门经理审批" camunda:assignee="李四">
+      <bpmn:incoming>Flow_0apeuqy</bpmn:incoming>
+      <bpmn:outgoing>Flow_0ve9ceq</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="MaxManager" name="总经理审批" camunda:assignee="王五">
+      <bpmn:incoming>Flow_0fifcgj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1p3hgdl</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="caiwu" name="财务审批" camunda:assignee="赵六">
+      <bpmn:incoming>Flow_10xmjtp</bpmn:incoming>
+      <bpmn:incoming>Flow_1p3hgdl</bpmn:incoming>
+      <bpmn:outgoing>Flow_09f4c0a</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0jgsklu" sourceRef="StartEvent_1" targetRef="create" />
+    <bpmn:sequenceFlow id="Flow_0apeuqy" sourceRef="create" targetRef="deptManager" />
+    <bpmn:sequenceFlow id="Flow_0ve9ceq" sourceRef="deptManager" targetRef="Gateway_0ya291g" />
+    <bpmn:sequenceFlow id="Flow_0fifcgj" sourceRef="Gateway_0ya291g" targetRef="MaxManager">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${evection.num&gt;=3}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_10xmjtp" sourceRef="Gateway_0ya291g" targetRef="caiwu">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${evection.num&lt;3}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1p3hgdl" sourceRef="MaxManager" targetRef="caiwu" />
+    <bpmn:sequenceFlow id="Flow_09f4c0a" sourceRef="caiwu" targetRef="Event_1ou98w5" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="evection-exclusive">
+      <bpmndi:BPMNEdge id="Flow_0jgsklu_di" bpmnElement="Flow_0jgsklu">
+        <di:waypoint x="188" y="210" />
+        <di:waypoint x="250" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0apeuqy_di" bpmnElement="Flow_0apeuqy">
+        <di:waypoint x="350" y="210" />
+        <di:waypoint x="420" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0ve9ceq_di" bpmnElement="Flow_0ve9ceq">
+        <di:waypoint x="520" y="210" />
+        <di:waypoint x="645" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fifcgj_di" bpmnElement="Flow_0fifcgj">
+        <di:waypoint x="670" y="185" />
+        <di:waypoint x="670" y="120" />
+        <di:waypoint x="800" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_10xmjtp_di" bpmnElement="Flow_10xmjtp">
+        <di:waypoint x="670" y="235" />
+        <di:waypoint x="670" y="320" />
+        <di:waypoint x="800" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1p3hgdl_di" bpmnElement="Flow_1p3hgdl">
+        <di:waypoint x="850" y="160" />
+        <di:waypoint x="850" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09f4c0a_di" bpmnElement="Flow_09f4c0a">
+        <di:waypoint x="900" y="320" />
+        <di:waypoint x="1082" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="152" y="192" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0srgt5n_di" bpmnElement="create">
+        <dc:Bounds x="250" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_02mk2zc_di" bpmnElement="deptManager">
+        <dc:Bounds x="420" y="170" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_0qsc2dw_di" bpmnElement="Gateway_0ya291g" isMarkerVisible="true">
+        <dc:Bounds x="645" y="185" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ctypo9_di" bpmnElement="MaxManager">
+        <dc:Bounds x="800" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1id1s7x_di" bpmnElement="caiwu">
+        <dc:Bounds x="800" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ou98w5_di" bpmnElement="Event_1ou98w5">
+        <dc:Bounds x="1082" y="302" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

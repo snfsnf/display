@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1xfxcxf" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.8.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.15.0">
+  <bpmn:process id="evection-candidate" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_18gunl1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_11aqs37">
+      <bpmn:incoming>Flow_0hx7rlq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="create" name="创建出差申请" camunda:assignee="张三">
+      <bpmn:extensionElements>
+        <camunda:taskListener class="" event="create" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_18gunl1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ieofpn</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="deptmanager" name="部门经理审批" camunda:candidateUsers="李四,王五">
+      <bpmn:incoming>Flow_1ieofpn</bpmn:incoming>
+      <bpmn:outgoing>Flow_001u58e</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="moneymanager" name="财务审批" camunda:assignee="赵六">
+      <bpmn:incoming>Flow_001u58e</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hx7rlq</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_18gunl1" sourceRef="StartEvent_1" targetRef="create" />
+    <bpmn:sequenceFlow id="Flow_1ieofpn" sourceRef="create" targetRef="deptmanager" />
+    <bpmn:sequenceFlow id="Flow_001u58e" sourceRef="deptmanager" targetRef="moneymanager" />
+    <bpmn:sequenceFlow id="Flow_0hx7rlq" sourceRef="moneymanager" targetRef="Event_11aqs37" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="evection-candidate">
+      <bpmndi:BPMNEdge id="Flow_0hx7rlq_di" bpmnElement="Flow_0hx7rlq">
+        <di:waypoint x="830" y="117" />
+        <di:waypoint x="942" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_001u58e_di" bpmnElement="Flow_001u58e">
+        <di:waypoint x="590" y="117" />
+        <di:waypoint x="730" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ieofpn_di" bpmnElement="Flow_1ieofpn">
+        <di:waypoint x="400" y="117" />
+        <di:waypoint x="490" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18gunl1_di" bpmnElement="Flow_18gunl1">
+        <di:waypoint x="215" y="117" />
+        <di:waypoint x="300" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_11aqs37_di" bpmnElement="Event_11aqs37">
+        <dc:Bounds x="942" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mlm10m_di" bpmnElement="create">
+        <dc:Bounds x="300" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0f5di0s_di" bpmnElement="deptmanager">
+        <dc:Bounds x="490" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1jq8xu1_di" bpmnElement="moneymanager">
+        <dc:Bounds x="730" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
